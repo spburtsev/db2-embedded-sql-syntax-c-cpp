@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int 
+test(
+
+)
+{int name = 0;
+        return name;}
+
 int main() {
     // Example of embedded SQL in C EXEC SQL nope;
     // EXEC SQL;
@@ -13,11 +20,13 @@ int main() {
     char name[50];
     EXEC SQL END DECLARE SECTION;
 
-    EXEC SQL SELECT id, name, 'test' INTO :id, :name FROM employees WHERE id = 1;
+    char address;
+
+    EXEC SQL SELECT id, 'test' INTO :id, :name FROM employees WHERE id = 1;
 
     printf("Embedded SQL sample\n");
     return 0;
-} 
+}
 
 void select_by_id(int id) {
     EXEC SQL BEGIN DECLARE SECTION;
