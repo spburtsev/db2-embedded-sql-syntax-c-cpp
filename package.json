@@ -9,13 +9,26 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "embedded-sql-syntax-c-cpp.helloWorld",
         "title": "Hello World"
+      }
+    ],
+    "grammars": [
+      {
+        "path": "./textmate-grammars/embedded-sql.tmLanguage.json",
+        "scopeName": "source.c.embedded.sql",
+        "injectTo": ["source.c", "source.cpp", "source.c++"],
+        "embeddedLanguages": {
+          "meta.embedded.sql.c": "sql"
+        }
       }
     ]
   },

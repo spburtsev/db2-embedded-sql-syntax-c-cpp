@@ -1,0 +1,44 @@
+{
+  "scopeName": "source.c.embedded.sql",
+  "injectionSelector": "L:source.c - comment, L:source.cpp - comment, L:source.c++ - comment",
+  "patterns": [
+    {
+      "include": "#embedded-sql"
+    }
+  ],
+  "repository": {
+    "embedded-sql": {
+      "name": "meta.embedded.sql.c",
+      "begin": "\\b(EXEC)\\s+(SQL)\\b",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.sql.exec.c" },
+        "2": { "name": "keyword.other.sql.c" }
+      },
+      "end": ";",
+      "endCaptures": {
+        "0": { "name": "punctuation.terminator.sql.c" }
+      },
+      "patterns": [
+        {
+          "match": "\\b(BEGIN|END|DECLARE|SECTION|SELECT|INTO|FROM|WHERE)\\b",
+          "name": "keyword.other.sql.c"
+        },
+        {
+          "match": "\\b([0-9]+(\\.([0-9]+))?|\\.[0-9]+)\\b",
+          "name": "constant.numeric.sql.c"
+        },
+        {
+          "name": "string.quoted.single.sql.c",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "match": "''",
+              "name": "constant.character.escape.sql.c"
+            }
+          ]
+        }
+      ]
+    }
+  }
+} 
