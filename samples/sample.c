@@ -22,9 +22,17 @@ int main() {
 void select_by_id(int id) {
     EXEC SQL BEGIN DECLARE SECTION;
     char name[50];
+    char address;
+    int age;
+    long item = 0;
     EXEC SQL END DECLARE SECTION;
 
-    EXEC SQL SELECT name INTO :name FROM employees WHERE id = :id;
+    memset(name, 0, sizeof(name));
+    
+    EXEC SQL SELECT name 
+        INTO :name 
+        FROM employees 
+        WHERE id = :id;
 
     printf("Selected name: %s\n", name);
 }
