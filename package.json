@@ -4,7 +4,7 @@
   "description": "Syntax highlighing for embedded IBM Db2 SQL statements in C/C++ code",
   "repository": {
     "type": "git",
-    "url": "https://github.com/spburtsev/embedded-sql-syntax-c-cpp.git"
+    "url": "https://github.com/spburtsev/db2-embedded-sql-syntax-c-cpp"
   },
   "license": "MIT",
   "version": "0.1.0",
