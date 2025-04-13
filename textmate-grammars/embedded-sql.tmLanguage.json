@@ -24,6 +24,13 @@
       },
       "patterns": [
         {
+          "match": "(?i)\\b(INCLUDE)\\s+(SQLCA|SQLDA|[a-zA-Z_][a-zA-Z0-9_-]*)\\b",
+          "captures": {
+            "1": { "name": "keyword.control.directive.include.sql.c" },
+            "2": { "name": "string.unquoted.sql.include.c" }
+          }
+        },
+        {
           "match": "(?i)\\b(ALLOCATE\\s+CURSOR|ALTER|ASSOCIATE\\s+LOCATORS|BEGIN\\s+DECLARE\\s+SECTION|CALL|CLOSE|COMMENT|COMMIT|CONNECT|CREATE|DECLARE\\s+CURSOR|DECLARE\\s+GLOBAL\\s+TEMPORARY\\s+TABLE|DECLARE\\s+STATEMENT|END\\s+DECLARE\\s+SECTION|RENAME|REVOKE|ROLLBACK|ROLLBACK\\s+TO\\s+SAVEPOINT|SAVEPOINT|SELECT|SELECT\\s+INTO|SET\\s+CONNECTION|SET|SIGNAL|TRUNCATE|UPDATE|VALUES|VALUES\\s+INTO|WHENEVER|INTO|FROM|WHERE)\\b",
           "name": "keyword.other.sql.dataaccess.c"
         },
