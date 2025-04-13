@@ -4,7 +4,7 @@
 
 This extension provides syntax highlighting for Db2 embedded SQL statements in C/C++ code.
 
-\!\[highlighting example\]\(images/highlighting-1.png\)
+![highlighting example](images/highlighting-1.png)
 
 ## Release Notes
 

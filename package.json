@@ -2,6 +2,10 @@
   "name": "db2-embedded-sql-syntax-c-cpp",
   "displayName": "Db2 Embedded SQL Syntax for C/C++",
   "description": "Syntax highlighing for embedded IBM Db2 SQL statements in C/C++ code",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spburtsev/embedded-sql-syntax-c-cpp.git"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.99.0"
