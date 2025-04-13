@@ -1,13 +1,20 @@
 {
-  "name": "embedded-sql-syntax-c-cpp",
-  "displayName": "embedded-sql-syntax-c-cpp",
-  "description": "Syntax highlighing and completion for SQL statements embedded in C/C++ code",
+  "name": "db2-embedded-sql-syntax-c-cpp",
+  "displayName": "Db2 Embedded SQL Syntax for C/C++",
+  "description": "Syntax highlighing for embedded IBM Db2 SQL statements in C/C++ code",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.99.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
+  ],
+  "keywords": [
+    "db2",
+    "sql",
+    "c",
+    "c++",
+    "syntax"
   ],
   "activationEvents": [
     "onLanguage:c",
@@ -15,12 +22,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "embedded-sql-syntax-c-cpp.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "grammars": [
       {
         "path": "./textmate-grammars/embedded-sql.tmLanguage.json",
