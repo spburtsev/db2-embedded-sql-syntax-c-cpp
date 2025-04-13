@@ -7,6 +7,8 @@
     "url": "https://github.com/spburtsev/db2-embedded-sql-syntax-c-cpp"
   },
   "license": "MIT",
+  "publisher": "spburtsev",
+  "icon": "images/icon.png",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.99.0"
