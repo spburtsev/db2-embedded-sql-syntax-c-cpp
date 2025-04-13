@@ -8,7 +8,7 @@ This extension provides syntax highlighting for Db2 embedded SQL statements in C
 
 ## Release Notes
 
-### 1.0.0
+### 0.1.0
 
 Initial release with basic syntax highlighting for embedded SQL keywords, types and functions
 
