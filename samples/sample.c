@@ -8,21 +8,25 @@ test(
 {int name = 0;
         return name;}
 
+// global host-variables
+EXEC SQL BEGIN DECLARE SECTION;
+int global_id;
+char global_name[50];
+EXEC SQL END DECLARE SECTION;
+
 int main() {
     // Example of embedded SQL in C EXEC SQL nope;
     // EXEC SQL;
     /*
+    /*
         EXEC SQL BEGIN DECLARE SECTION;
     */
-
-    EXEC SQL BEGIN DECLARE SECTION;
-    int id;
-    char name[50];
-    EXEC SQL END DECLARE SECTION;
-
     char address;
+    if (test() == 0) {
+        ;
+    }
 
-    EXEC SQL SELECT id, 'test' INTO :id, :name FROM employees WHERE id = 1;
+    EXEC SQL SELECT id, 'test' INTO :global_id, :global_name FROM employees WHERE id = 1;
 
     printf("Embedded SQL sample\n");
     return 0;
