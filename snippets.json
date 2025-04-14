@@ -1,0 +1,38 @@
+{
+    "Db2: declare host variables": {
+        "prefix": "db2declhv",
+        "body": [
+            "EXEC SQL BEGIN DECLARE SECTION;",
+            "${1:type} ${2:name} = ${3:expr};",
+            "EXEC SQL END DECLARE SECTION;"
+        ]
+    },
+    "Db2: declare cursor": {
+        "prefix": "db2declcur",
+        "body": "EXEC SQL DECLARE ${1:cursor_name} CURSOR FOR ${2:select_statement};"
+    },
+    "Db2: open cursor": {
+        "prefix": "db2opencur",
+        "body": "EXEC SQL OPEN ${1:cursor_name};"
+    },
+    "Db2: fetch": {
+        "prefix": "db2fetch",
+        "body": "EXEC SQL FETCH ${1:cursor_name} INTO ${2:host_variables};"
+    },
+    "Db2: close cursor": {
+        "prefix": "db2closecur",
+        "body": "EXEC SQL CLOSE ${1:cursor_name};"
+    },
+    "Db2: include": {
+        "prefix": "db2inc",
+        "body": "EXEC SQL INCLUDE ${1:member_name};"
+    },
+    "Db2: select": {
+        "prefix": "db2select",
+        "body": "EXEC SQL SELECT ${1:column_name} INTO ${2:host_variable} FROM ${3:table_name} WHERE ${4:condition};"
+    },
+    "Db2: commit": {
+        "prefix": "db2commit",
+        "body": "EXEC SQL COMMIT;"
+    }
+}

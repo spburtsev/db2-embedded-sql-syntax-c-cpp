@@ -9,12 +9,13 @@
   "license": "MIT",
   "publisher": "spburtsev",
   "icon": "images/icon.png",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.99.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Snippets"
   ],
   "keywords": [
     "db2",
@@ -42,6 +43,16 @@
           "meta.embedded.sql.c": "sql"
         }
       }
+    ],
+    "snippets": [
+        {
+            "language": "c",
+            "path": "./snippets.json"
+        },
+        {
+            "language": "cpp",
+            "path": "./snippets.json"
+        }
     ]
   },
   "scripts": {
