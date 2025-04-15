@@ -9,9 +9,9 @@
   "license": "MIT",
   "publisher": "spburtsev",
   "icon": "images/icon.png",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "engines": {
-    "vscode": "^1.99.0"
+    "vscode": "^1.43.0"
   },
   "categories": [
     "Programming Languages",
