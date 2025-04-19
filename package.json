@@ -9,7 +9,7 @@
   "license": "MIT",
   "publisher": "spburtsev",
   "icon": "images/icon.png",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.43.0"
   },
@@ -25,32 +25,27 @@
     "syntax"
   ],
   "activationEvents": [
-    "onLanguage:c",
-    "onLanguage:cpp"
+    "onLanguage:sqc"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "sqc",
+        "extensions": [".sqc"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
     "grammars": [
       {
-        "path": "./textmate-grammars/embedded-sql.tmLanguage.json",
-        "scopeName": "source.c.embedded.sql",
-        "injectTo": [
-          "source.c",
-          "source.cpp",
-          "source.c++"
-        ],
-        "embeddedLanguages": {
-          "meta.embedded.sql.c": "sql"
-        }
+        "language": "sqc",
+        "scopeName": "source.sqc",
+        "path": "./textmate-grammars/sqc.tmLanguage.json"
       }
     ],
     "snippets": [
       {
-        "language": "c",
-        "path": "./snippets.json"
-      },
-      {
-        "language": "cpp",
+        "language": "sqc",
         "path": "./snippets.json"
       }
     ]

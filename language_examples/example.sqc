@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sqlca.h>
+
+EXEC SQL INCLUDE SQLCA;
+
+EXEC SQL BEGIN DECLARE SECTION;
+int global_counter_hv;
+int global_counter_2_hv;
+EXEC SQL END DECLARE SECTION;
+
+struct {
+    char name[51];
+    char dept[4];
+    int salary;
+} emp_rec;
+
+int main() {
+    char dept_no[4];
+    
+    printf("Enter department number: ");
+    scanf("%3s", dept_no);
+    
+    // Connect to the database
+    EXEC SQL CONNECT TO sample USER db2admin USING db2admin;
+    
+    // Begin a DECLARE SECTION for host variables
+    EXEC SQL BEGIN DECLARE SECTION;
+    char v_dept[4];
+    EXEC SQL END DECLARE SECTION;
+    
+    // Copy the department number to the host variable
+    strcpy(v_dept, dept_no);
+    
+    // Prepare a cursor
+    EXEC SQL 
+        DECLARE C1 CURSOR FOR 
+        SELECT name, dept, salary 
+        FROM employee 
+        WHERE dept = :v_dept;
+    
+    // Open the cursor
+    EXEC SQL OPEN C1;
+    
+    printf("Employees in department %s:\n", dept_no);
+    printf("----------------------------\n");
+    printf("Name                   Department   Salary\n");
+    
+    // Fetch records
+    while (1) {
+        EXEC SQL FETCH C1 INTO :emp_rec.name, :emp_rec.dept, :emp_rec.salary;
+        
+        if (sqlca.sqlcode != 0) break; // No more records or error
+        
+        printf("%-20s   %-10s   %d\n", emp_rec.name, emp_rec.dept, emp_rec.salary);
+    }
+    
+    // Close the cursor
+    EXEC SQL CLOSE C1;
+    
+    // Commit the transaction
+    EXEC SQL COMMIT;
+    
+    // Disconnect from the database
+    EXEC SQL CONNECT RESET;
+    
+    return 0;
+} 
