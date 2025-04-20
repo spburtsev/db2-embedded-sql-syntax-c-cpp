@@ -29,6 +29,16 @@ Some snippets for SQL statements added
 
 Initial release with basic syntax highlighting for embedded SQL keywords, types and functions
 
+## Development Roadmap
+
+The following features are planned for future releases:
+
+- Integration with C/C++ language services
+- Semantic highlighting for host variables, cursors, and other SQL elements
+- Diagnostics for common SQL syntax errors
+- Code completion for SQL keywords and statements
+- Hover information for SQL functions and syntax
+
 ## Snippets
 
 Below is a list of all available snippets and the triggers of each one. The **⇥** means the `TAB` key.
@@ -64,5 +74,10 @@ EXEC SQL BEGIN DECLARE SECTION;
 // Host variables here
 EXEC SQL END DECLARE SECTION;
 ```
+
+## Acknowledgements
+
+This extension builds upon the excellent work of:
+- [jeff-hykin](https://github.com/jeff-hykin) for the enhanced syntax highlighting provided by [Better C Syntax](https://github.com/jeff-hykin/better-c-syntax) and [Better C++ Syntax](https://github.com/jeff-hykin/better-cpp-syntax)
 
 [examples]: https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=statements-c-c-programming-examples

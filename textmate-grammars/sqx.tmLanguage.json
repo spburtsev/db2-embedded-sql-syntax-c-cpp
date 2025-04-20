@@ -7,6 +7,9 @@
       "include": "#embedded-sql"
     },
     {
+      "include": "#sql-declare-section"
+    },
+    {
       "include": "source.cpp#block"
     },
     {
@@ -110,7 +113,37 @@
     }
   },
   "injections": {
+    "L:source.sqC": {
+      "patterns": [
+        {
+          "include": "#embedded-sql"
+        },
+        {
+          "include": "#sql-declare-section"
+        }
+      ]
+    },
     "L:source.sqC meta.block.cpp": {
+      "patterns": [
+        {
+          "include": "#embedded-sql"
+        },
+        {
+          "include": "#sql-declare-section"
+        }
+      ]
+    },
+    "L:source.sqC meta.body.function.definition.cpp": {
+      "patterns": [
+        {
+          "include": "#embedded-sql"
+        },
+        {
+          "include": "#sql-declare-section"
+        }
+      ]
+    },
+    "L:source.sqC meta.body.class.cpp": {
       "patterns": [
         {
           "include": "#embedded-sql"
