@@ -1,69 +1,123 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+#include <vector>
 #include <sqlca.h>
 
+// Include SQL Communications Area
 EXEC SQL INCLUDE SQLCA;
 
+// Define SQL Declare Section with host variables
 EXEC SQL BEGIN DECLARE SECTION;
-int global_counter_hv;
-int global_counter_2_hv;
+    // Host variables for database connection
+    char db_name[20] = "SAMPLE";
+    char user_id[20] = "db2admin";
+    char password[20] = "db2admin";
+    
+    // Host variables for data
+    char department_id[4];
+    struct {
+        char name[51];
+        char dept[4];
+        int salary;
+        short int salary_ind;
+    } employee;
+    
+    // SQL status indicators
+    short int indicators[3];
 EXEC SQL END DECLARE SECTION;
 
-struct {
-    char name[51];
-    char dept[4];
-    int salary;
-} emp_rec;
-
-int main() {
-    char dept_no[4];
+// C++ class for employee data
+class EmployeeManager {
+private:
+    std::vector<std::string> employees;
     
-    printf("Enter department number: ");
-    scanf("%3s", dept_no);
-    
-    // Connect to the database
-    EXEC SQL CONNECT TO sample USER db2admin USING db2admin;
-    
-    // Begin a DECLARE SECTION for host variables
-    EXEC SQL BEGIN DECLARE SECTION;
-    char v_dept[4];
-    EXEC SQL END DECLARE SECTION;
-    
-    // Copy the department number to the host variable
-    strcpy(v_dept, dept_no);
-    
-    // Prepare a cursor
-    EXEC SQL 
-        DECLARE C1 CURSOR FOR 
-        SELECT name, dept, salary 
-        FROM employee 
-        WHERE dept = :v_dept;
-    
-    // Open the cursor
-    EXEC SQL OPEN C1;
-    
-    printf("Employees in department %s:\n", dept_no);
-    printf("----------------------------\n");
-    printf("Name                   Department   Salary\n");
-    
-    // Fetch records
-    while (1) {
-        EXEC SQL FETCH C1 INTO :emp_rec.name, :emp_rec.dept, :emp_rec.salary;
-        
-        if (sqlca.sqlcode != 0) break; // No more records or error
-        
-        printf("%-20s   %-10s   %d\n", emp_rec.name, emp_rec.dept, emp_rec.salary);
+public:
+    EmployeeManager() {
+        std::cout << "Employee Manager initialized" << std::endl;
     }
     
-    // Close the cursor
-    EXEC SQL CLOSE C1;
+    void fetchEmployees(const std::string& deptId) {
+        std::cout << "Fetching employees from department: " << deptId << std::endl;
+        
+        // Copy department ID to host variable
+        strncpy(department_id, deptId.c_str(), sizeof(department_id));
+        
+        // Connect to database
+        EXEC SQL CONNECT TO :db_name USER :user_id USING :password;
+        
+        // Check connection status
+        if (SQLCODE != 0) {
+            std::cerr << "Error connecting to database: " << SQLCODE << std::endl;
+            return;
+        }
+        
+        // Declare cursor
+        EXEC SQL DECLARE EMP_CURSOR CURSOR FOR
+            SELECT name, dept, salary
+            FROM employee
+            WHERE dept = :department_id;
+        
+        // Open cursor
+        EXEC SQL OPEN EMP_CURSOR;
+        
+        // Fetch data using modern C++ to store results
+        bool more_data = true;
+        while (more_data) {
+            EXEC SQL FETCH EMP_CURSOR INTO 
+                :employee.name :indicators[0],
+                :employee.dept :indicators[1],
+                :employee.salary :indicators[2];
+            
+            if (SQLCODE == 0) {
+                // Add employee to vector if data is valid
+                if (indicators[0] >= 0) {
+                    employees.push_back(employee.name);
+                    std::cout << "Found employee: " << employee.name 
+                              << ", Salary: " << employee.salary << std::endl;
+                }
+            } else if (SQLCODE == 100) {
+                // No more data
+                more_data = false;
+            } else {
+                // Error occurred
+                std::cerr << "Error fetching data: " << SQLCODE << std::endl;
+                more_data = false;
+            }
+        }
+        
+        // Close cursor
+        EXEC SQL CLOSE EMP_CURSOR;
+        
+        // Commit transaction
+        EXEC SQL COMMIT;
+        
+        // Disconnect from database
+        EXEC SQL CONNECT RESET;
+    }
     
-    // Commit the transaction
-    EXEC SQL COMMIT;
+    void displayEmployees() {
+        std::cout << "\nEmployee list:" << std::endl;
+        std::cout << "-----------------------------" << std::endl;
+        
+        for (const auto& emp : employees) {
+            std::cout << emp << std::endl;
+        }
+        
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "Total employees: " << employees.size() << std::endl;
+    }
+};
+
+int main() {
+    std::string dept_id;
     
-    // Disconnect from the database
-    EXEC SQL CONNECT RESET;
+    std::cout << "Enter department ID: ";
+    std::cin >> dept_id;
+    
+    // Create and use the employee manager
+    EmployeeManager manager;
+    manager.fetchEmployees(dept_id);
+    manager.displayEmployees();
     
     return 0;
 } 

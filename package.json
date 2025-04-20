@@ -25,7 +25,8 @@
     "syntax"
   ],
   "activationEvents": [
-    "onLanguage:sqc"
+    "onLanguage:sqc",
+    "onLanguage:sqC"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -34,6 +35,11 @@
         "id": "sqc",
         "extensions": [".sqc"],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "sqC",
+        "extensions": [".sqC", ".sqx"],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -41,11 +47,20 @@
         "language": "sqc",
         "scopeName": "source.sqc",
         "path": "./textmate-grammars/sqc.tmLanguage.json"
+      },
+      {
+        "language": "sqC",
+        "scopeName": "source.sqC",
+        "path": "./textmate-grammars/sqx.tmLanguage.json"
       }
     ],
     "snippets": [
       {
         "language": "sqc",
+        "path": "./snippets.json"
+      },
+      {
+        "language": "sqC",
         "path": "./snippets.json"
       }
     ]

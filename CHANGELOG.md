@@ -6,8 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.3.0]
 
-- Added enhanced C syntax highlighting from Better C Syntax project
-- Added support for .sqc files (C source files with embedded IBM Db2 SQL)
+- Added custom language modes: sqc for C code and sqC for C++ code
+- Added enhanced C/C++ syntax highlighting from Better C Syntax and Better C++ Syntax projects
 
 ## [0.2.1]
 

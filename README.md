@@ -6,7 +6,9 @@ This extension provides syntax highlighting and snippets for [Db2 embedded SQL s
 
 - Syntax highlighting for embedded SQL statements in C/C++ files
 - Enhanced C syntax highlighting via Better C Syntax
+- Enhanced C++ syntax highlighting via Better C++ Syntax
 - Full support for .sqc files (C source files with embedded IBM Db2 SQL)
+- Full support for .sqC files (C++ source files with embedded IBM Db2 SQL)
 - Snippets for common SQL operations
 
 ![highlighting example](images/highlighting-1.png)
@@ -15,8 +17,9 @@ This extension provides syntax highlighting and snippets for [Db2 embedded SQL s
 
 ### 0.3.0
 
-- Enhanced C syntax highlighting from Better C Syntax project
+- Enhanced C/C++ syntax highlighting
 - Added support for .sqc files (C source files with embedded IBM Db2 SQL)
+- Added support for .sqC files (C++ source files with embedded IBM Db2 SQL)
 
 ### 0.2.0
 
@@ -43,10 +46,23 @@ Below is a list of all available snippets and the triggers of each one. The **â‡
 
 ## SQC Files
 
-This extension provides full syntax highlighting for .sqc files, which are C source files containing embedded SQL statements. These files are commonly used in IBM Db2 application development.
+This extension provides full syntax highlighting for both .sqc and .sqC files:
+
+- **.sqc** - C source files containing embedded SQL statements (common in IBM Db2 application development)
+- **.sqC** - C++ source files containing embedded SQL statements
 
 The syntax highlighting combines:
-1. Enhanced C language syntax from the Better C Syntax project
+1. Enhanced language syntax (C or C++) from the respective Better Syntax project
 2. Embedded SQL syntax for Db2 statements
+
+## Special Sections
+
+SQL declare sections are specially highlighted and can be folded in the editor:
+
+```c
+EXEC SQL BEGIN DECLARE SECTION;
+// Host variables here
+EXEC SQL END DECLARE SECTION;
+```
 
 [examples]: https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=statements-c-c-programming-examples
