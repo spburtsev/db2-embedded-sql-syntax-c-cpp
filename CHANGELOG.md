@@ -7,6 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### [0.3.0]
 
 - Automatic language mode detection for C/C++ files with embedded SQL
+- Esbuild added
 
 ## [0.2.1]
 

@@ -4,15 +4,16 @@ const processedFiles = new Set<string>();
 
 export function activate(context: vscode.ExtensionContext) {
     registerFileAssociations();
-
-    vscode.workspace.findFiles('**/*.sq{c,C,x}').then(files => {
-        files.forEach(setInitialLanguageMode);
-    });
-
+    
+    vscode.workspace.findFiles('**/*.sq{c,C,x}')
+        .then(files => files.forEach(setInitialLanguageMode));
+    
     context.subscriptions.push(
-        vscode.workspace.onDidOpenTextDocument(document => {
-            setInitialLanguageMode(document.uri).catch(console.error);
-        })
+        vscode.workspace.onDidOpenTextDocument(doc => 
+            setInitialLanguageMode(doc.uri).catch(err => 
+                console.error('Error setting language mode:', err)
+            )
+        )
     );
 }
 
@@ -41,21 +42,12 @@ async function setInitialLanguageMode(uri: vscode.Uri) {
     } catch (error) {
         console.error('Error setting initial language mode:', error);
     }
-};
+}
 
-const customAssociations = [
-    {
-        pattern: '*.sqc',
-        language: 'c'
-    },
-    {
-        pattern: '*.sqC',
-        language: 'cpp'
-    },
-    {
-        pattern: '*.sqx',
-        language: 'cpp'
-    }
+const fileAssociations = [
+    { pattern: '*.sqc', language: 'c' },
+    { pattern: '*.sqC', language: 'cpp' },
+    { pattern: '*.sqx', language: 'cpp' }
 ];
 
 function registerFileAssociations() {
@@ -63,12 +55,12 @@ function registerFileAssociations() {
     const currentAssociations: Record<string, string> = config.get('files.associations') || {};
 
     let changed = false;
-    customAssociations.forEach(({ pattern, language }) => {
+    for (const {pattern, language} of fileAssociations) {
         if (!currentAssociations[pattern]) {
             currentAssociations[pattern] = language;
             changed = true;
         }
-    });
+    }
     if (changed) {
         config.update('files.associations', currentAssociations, vscode.ConfigurationTarget.Global);
     }
