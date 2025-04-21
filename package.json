@@ -9,7 +9,7 @@
   "license": "MIT",
   "publisher": "spburtsev",
   "icon": "images/icon.png",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.43.0"
   },
@@ -26,7 +26,11 @@
   ],
   "activationEvents": [
     "onLanguage:c",
-    "onLanguage:cpp"
+    "onLanguage:cpp",
+    "onStartupFinished",
+    "workspaceContains:**/*.sqc",
+    "workspaceContains:**/*.sqC",
+    "workspaceContains:**/*.sqx"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -44,6 +48,32 @@
         }
       }
     ],
+    "languages": [
+      {
+        "id": "c",
+        "extensions": [
+          ".sqc"
+        ],
+        "aliases": [
+          "C+SQL",
+          "C with SQL",
+          "sqc"
+        ]
+      },
+      {
+        "id": "cpp",
+        "extensions": [
+          ".sqC",
+          ".sqx"
+        ],
+        "aliases": [
+          "C++SQL",
+          "C++ with SQL", 
+          "sqC",
+          "sqx"
+        ]
+      }
+    ],
     "snippets": [
       {
         "language": "c",
@@ -53,7 +83,14 @@
         "language": "cpp",
         "path": "./snippets.json"
       }
-    ]
+    ],
+    "configurationDefaults": {
+      "files.associations": {
+        "*.sqc": "c",
+        "*.sqC": "cpp",
+        "*.sqx": "cpp"
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

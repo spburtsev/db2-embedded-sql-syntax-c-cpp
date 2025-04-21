@@ -8,6 +8,10 @@ This extension provides syntax highlighting and snippets for [Db2 embedded SQL s
 
 ## Release Notes
 
+### 0.3.0
+
+Automatic language mode detection for C/C++ files with embedded SQL
+
 ### 0.2.0
 
 Some snippets for SQL statements added
