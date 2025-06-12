@@ -1,6 +1,6 @@
 {
   "scopeName": "source.c.embedded.sql",
-  "injectionSelector": "L:source.c - comment, L:source.cpp - comment, L:source.c++ - comment",
+  "injectionSelector": "L:source.c - comment - string, L:source.cpp - comment - string, L:source.c++ - comment - string",
   "patterns": [
     {
       "include": "#embedded-sql"
